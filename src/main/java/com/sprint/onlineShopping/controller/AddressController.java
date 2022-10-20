@@ -34,6 +34,7 @@ public class AddressController {
 
 	@GetMapping("/getall")
 	public List<Address> list() {
+		System.out.println(addressRepository.findAll());
 		return addressRepository.findAll();
 	}
 

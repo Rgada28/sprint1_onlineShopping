@@ -24,14 +24,14 @@ public class Address {
 	private String state;
 	private Integer pincode;
 	private Integer buyerId;
-	private BigInteger primaryPhone;
-	private BigInteger secondaryPhone;
+	private Long primaryPhone;
+	private Long secondaryPhone;
 
 	public Address() {
 	}
 
 	public Address(Integer addressId, String street, String addressLine1, String city, String state, Integer pincode,
-			Integer buyerId, BigInteger primaryPhone, BigInteger secondaryPhone) {
+			Integer buyerId, Long primaryPhone, Long secondaryPhone) {
 		super();
 		this.addressId = addressId;
 		this.street = street;
@@ -100,19 +100,19 @@ public class Address {
 		this.buyerId = buyerId;
 	}
 
-	public BigInteger getPrimaryPhone() {
+	public Long getPrimaryPhone() {
 		return primaryPhone;
 	}
 
-	public void setPrimaryPhone(BigInteger primaryPhone) {
+	public void setPrimaryPhone(Long primaryPhone) {
 		this.primaryPhone = primaryPhone;
 	}
 
-	public BigInteger getSecondaryPhone() {
+	public Long getSecondaryPhone() {
 		return secondaryPhone;
 	}
 
-	public void setSecondaryPhone(BigInteger secondaryPhone) {
+	public void setSecondaryPhone(Long secondaryPhone) {
 		this.secondaryPhone = secondaryPhone;
 	}
 

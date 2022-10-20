@@ -63,7 +63,8 @@ public class BuyerController {
 	public Buyer get(@PathVariable Integer id) throws RecordNotFoundException {
 		Optional<Buyer> b = buyerRepository.findById(id);
 		if (!b.isPresent())
-			throw new RecordNotFoundException("Invalid BuyerId, \nThe entered BuyerId entered is not present in the database");
+			throw new RecordNotFoundException(
+					"Invalid BuyerId, \nThe entered BuyerId entered is not present in the database");
 		Buyer buyer = buyerRepository.getById(id);
 //		if(b.getClass()!=Buyer.class)
 		return buyer;
@@ -133,7 +134,8 @@ public class BuyerController {
 	public ObjectNode getBuyerCartDetails(@PathVariable Integer id) throws RecordNotFoundException {
 		Optional<Buyer> b = buyerRepository.findById(id);
 		if (!b.isPresent())
-			throw new RecordNotFoundException("Invalid BuyerId, \nThe entered BuyerId entered is not present in the database");
+			throw new RecordNotFoundException(
+					"Invalid BuyerId, \nThe entered BuyerId entered is not present in the database");
 		Buyer buyer = buyerRepository.getOne(id);
 		List<CartDetail> cartDetails = cartDetailRepository.findAllByCartId(buyer.getCartId());
 		System.out.println(cartDetails);
@@ -153,16 +155,18 @@ public class BuyerController {
 	public ObjectNode addToCart(@PathVariable Integer id, @RequestBody ObjectNode json) throws RecordNotFoundException {
 		Optional<Buyer> b = buyerRepository.findById(id);
 		if (!b.isPresent())
-			throw new RecordNotFoundException("Invalid BuyerId, \nThe entered BuyerId entered is not present in the database");
+			throw new RecordNotFoundException(
+					"Invalid BuyerId, \nThe entered BuyerId entered is not present in the database");
 		Buyer buyer = buyerRepository.getById(id);
 		System.out.println(json.get("productId").asInt());
 		Product product;
 		Cart existingCart;
-			Optional<Product> prod = productRepository.findById(id);
-			if (!prod.isPresent())
-				throw new RecordNotFoundException("Invalid ProductID, \nThe entered ProductID entered is not present in the database");
-			product = productRepository.getById(json.get("productId").asInt());
-		
+		Optional<Product> prod = productRepository.findById(id);
+		if (!prod.isPresent())
+			throw new RecordNotFoundException(
+					"Invalid ProductID, \nThe entered ProductID entered is not present in the database");
+		product = productRepository.getById(json.get("productId").asInt());
+
 		if (product == null)
 			throw new RecordNotFoundException("The Product record does not exists");
 		existingCart = cartRepository.getById(buyer.getCartId());
@@ -184,7 +188,8 @@ public class BuyerController {
 	public String delete(@PathVariable Integer id) throws RecordNotFoundException {
 		Optional<Buyer> b = buyerRepository.findById(id);
 		if (!b.isPresent())
-			throw new RecordNotFoundException("Invalid BuyerId Cannot Delete, \nThe entered BuyerId entered is not present in the database");
+			throw new RecordNotFoundException(
+					"Invalid BuyerId Cannot Delete, \nThe entered BuyerId entered is not present in the database");
 		Buyer buyer = buyerRepository.getById(id);
 		if (buyer != null)
 			buyerRepository.deleteById(id);
@@ -193,10 +198,12 @@ public class BuyerController {
 
 	// Update User by ID
 	@PutMapping("/update/{id}")
-	public Buyer update(@PathVariable Integer id, @RequestBody Buyer buyer) throws EmptyInputException, RecordNotFoundException {
+	public Buyer update(@PathVariable Integer id, @RequestBody Buyer buyer)
+			throws EmptyInputException, RecordNotFoundException {
 		Optional<Buyer> b = buyerRepository.findById(id);
 		if (!b.isPresent())
-			throw new RecordNotFoundException("Invalid BuyerId Cannot Update, \nThe entered BuyerId entered is not present in the database");
+			throw new RecordNotFoundException(
+					"Invalid BuyerId Cannot Update, \nThe entered BuyerId entered is not present in the database");
 		Buyer existingBuyer = buyerRepository.getOne(id);
 		if (buyer.getName() == null || buyer.getName().isEmpty())
 			throw new EmptyInputException("No value was passed in buyer name parameter");
